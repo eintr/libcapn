@@ -744,7 +744,7 @@ static apn_return __apn_send_binary_message(const apn_ctx_t *const ctx,
         }
         apn_log(ctx, APN_LOG_LEVEL_INFO, "Notification has been sent");
     }
-
+/*
     if (!apple_returned_error) {
         timeout.tv_sec = 1;
         do {
@@ -757,6 +757,7 @@ static apn_return __apn_send_binary_message(const apn_ctx_t *const ctx,
         __APN_SELECT_ERROR(select_returned)
         __API_SOCKET_READ(ctx, &read_set, apple_error_str, apple_returned_error, 0, i, invalid_token_index)
     }
+*/
     if (apple_returned_error) {
         apn_log(ctx, APN_LOG_LEVEL_DEBUG, "Parsing Apple response...", *apple_error_code);
         __apn_parse_apns_error(apple_error_str, apple_error_code, invalid_token_index);
