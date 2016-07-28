@@ -729,7 +729,6 @@ static apn_return __apn_send_binary_message(const apn_ctx_t *const ctx,
         } while (0 == select_returned || (0 > select_returned && EINTR == errno));
 
         __APN_SELECT_ERROR(select_returned)
-        __API_SOCKET_READ(ctx, &read_set, apple_error_str, apple_returned_error, 1, i, invalid_token_index)
 
         if (FD_ISSET(ctx->sock, &write_set)) {
             apn_log(ctx, APN_LOG_LEVEL_DEBUG, "Socket is ready for writing");
@@ -742,6 +741,7 @@ static apn_return __apn_send_binary_message(const apn_ctx_t *const ctx,
             }
             apn_log(ctx, APN_LOG_LEVEL_DEBUG, "%d byte(s) has been written to a socket", bytes_written);
         }
+        __API_SOCKET_READ(ctx, &read_set, apple_error_str, apple_returned_error, 1, i, invalid_token_index)
         apn_log(ctx, APN_LOG_LEVEL_INFO, "Notification has been sent");
     }
 /*
